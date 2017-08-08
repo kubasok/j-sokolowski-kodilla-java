@@ -1,9 +1,8 @@
 package com.kodilla.testing.collection;
 
 import org.junit.*;
-import com.kodilla.testing.collection.OddNumbersExterminator;
-
 import java.util.*;
+import java.lang.*;
 
 public class CollectionTestSuite {
     @Before
@@ -26,7 +25,7 @@ public class CollectionTestSuite {
     @Test
     public void testOddNumbersExterminatorEmptyList(){
         //Given
-        List<Integer> emptyList = new ArrayList<Integer>();
+        List<Integer> emptyList = Collections.emptyList();
         OddNumbersExterminator exterminator = new OddNumbersExterminator();
         //When
         List<Integer> testList = exterminator.exterminate(emptyList);
@@ -39,18 +38,15 @@ public class CollectionTestSuite {
     public void testOddNumbersExterminatorNormalList(){
         //Given
         List<Integer> normalList = new ArrayList<Integer>();
-        Random randomGenerator = new Random();
-
-        for (int i=0; i<10; i++){
-            int randomInt = randomGenerator.nextInt(100)+1;
-            normalList.add(randomInt);
-        }
+        normalList.addAll(Arrays.asList(1,2,3,4,5,6));
+        Integer[] sampleArray = {2,4,6};
         OddNumbersExterminator exterminator = new OddNumbersExterminator();
         //When
         List<Integer> testList = exterminator.exterminate(normalList);
         System.out.println("Testing: " + normalList);
         //Then
         System.out.println("Result: " + testList);
-        Assert.assertTrue(testList.size()>0);
+        Assert.assertTrue(testList.size()==3);
+        Assert.assertArrayEquals(testList.toArray(),sampleArray);
     }
 }
