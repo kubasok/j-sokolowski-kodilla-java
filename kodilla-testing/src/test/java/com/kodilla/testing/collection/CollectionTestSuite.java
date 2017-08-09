@@ -46,7 +46,7 @@ public class CollectionTestSuite {
         System.out.println("Testing: " + normalList);
         //Then
         System.out.println("Result: " + testList);
-        Assert.assertTrue(testList.size()==3);
+        Assert.assertEquals(testList.size(),3);
         Assert.assertArrayEquals(testList.toArray(),sampleArray);
     }
 }

@@ -4,8 +4,13 @@ public class Square implements Shape {
     private double a;
     private String shapeName;
 
+    public Square(double a, String shapeName) {
+        this.a = a;
+        this.shapeName = shapeName;
+    }
+
     public double getField() {
-        return a^2;
+        return (double) Math.pow(a,2);
     }
 
     public String getShapeName() {
