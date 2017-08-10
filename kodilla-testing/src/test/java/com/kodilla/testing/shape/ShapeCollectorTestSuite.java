@@ -34,6 +34,7 @@ public class ShapeCollectorTestSuite {
         collector.addFigure(testTriangle);
 
         Assert.assertEquals(collector.shapeCollectorList.size(),3);
+        Assert.assertArrayEquals(collector.shapeCollectorList.toArray(),collector.shapeCollectorList.toArray());
         Assert.assertEquals("Circle1",collector.getFigure(0).getShapeName());
         Assert.assertEquals("Square1", collector.getFigure(1).getShapeName());
         Assert.assertEquals("Triangle1",collector.getFigure(2).getShapeName());
