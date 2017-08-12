@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -12,7 +13,8 @@ public class StatisticsTestSuit {
     public void testStatisticsValues(){
 //        Given
         Statistics statsMock = mock(Statistics.class);
-        when(statsMock.usersNames().size()).thenReturn(100);
+        List<String> testNames = Collections.nCopies(100, "sameUserName");
+        when(statsMock.usersNames()).thenReturn(testNames);
         when(statsMock.postsCount()).thenReturn(100);
         when(statsMock.commentsCount()).thenReturn(1000);
 
@@ -34,7 +36,8 @@ public class StatisticsTestSuit {
     public void testStatisticsValues2(){
 //        Given
         Statistics statsMock = mock(Statistics.class);
-        when(statsMock.usersNames().size()).thenReturn(100);
+        List<String> testNames = Collections.nCopies(100, "sameUserName");
+        when(statsMock.usersNames()).thenReturn(testNames);
         when(statsMock.postsCount()).thenReturn(1000);
         when(statsMock.commentsCount()).thenReturn(100);
 
@@ -50,7 +53,7 @@ public class StatisticsTestSuit {
         Assert.assertEquals(100,calculator.getCommentsNumber());
         Assert.assertEquals(10,calculator.getPostsPerUser(),1e-15);
         Assert.assertEquals(1,calculator.getCommentsPerUser(),1e-15);
-        Assert.assertEquals(1,calculator.getCommentsPerPost(),1e-15);
+        Assert.assertEquals(0.1,calculator.getCommentsPerPost(),1e-15);
     }
 
     @Test
