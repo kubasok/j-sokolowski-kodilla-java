@@ -3,10 +3,10 @@ package com.kodilla.testing.library;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -88,5 +88,69 @@ public class BookDirectoryTestSuite {
         // Then
         assertEquals(0, theListOfBooks10.size());
         verify(libraryDatabaseMock, times(0)).listBooksWithCondition(anyString());
+    }
+
+    @Test
+    public void testListUsersWithNoBooks() {
+        // Given
+        LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
+        LibraryUser testUserMock = mock(LibraryUser.class);
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        List<Book> resultListOf0Books = Collections.emptyList();
+        when(libraryDatabaseMock.listBooksInHandsOf(testUserMock))
+                .thenReturn(resultListOf0Books);
+
+
+        // When
+        List<Book> theListOfBooks0 = bookLibrary.listBooksInHandsOf(testUserMock);
+
+        // Then
+        assertEquals(0, theListOfBooks0.size());
+        verify(libraryDatabaseMock, times(1)).listBooksInHandsOf(testUserMock);
+    }
+
+    @Test
+    public void testListUsersWith1Book() {
+        // Given
+        LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
+        LibraryUser testUserMock = mock(LibraryUser.class);
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        List<Book> resultListOf1Book = new ArrayList<Book>();
+        resultListOf1Book.add(new Book("LOTR","Tolkien",1959));
+        when(libraryDatabaseMock.listBooksInHandsOf(testUserMock))
+                .thenReturn(resultListOf1Book);
+
+
+        // When
+        List<Book> theListOf1Book = bookLibrary.listBooksInHandsOf(testUserMock);
+
+        // Then
+        assertEquals(1, theListOf1Book.size());
+        verify(libraryDatabaseMock, times(1)).listBooksInHandsOf(testUserMock);
+    }
+
+    @Test
+    public void testListUsersWith5Books() {
+        // Given
+        LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
+        LibraryUser testUserMock = mock(LibraryUser.class);
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        List<Book> resultListOf5Books = new ArrayList<Book>();
+        resultListOf5Books.add(new Book("LOTR","Tolkien",1959));
+        resultListOf5Books.add(new Book("Pillars of the Earth","Follet",1989));
+        resultListOf5Books.add(new Book("Pan Tadeusz","Mickiewicz",1834));
+        resultListOf5Books.add(new Book("Harry Potter","Rowling",1999));
+        resultListOf5Books.add(new Book("Nineteen Eighty-Four","Orwell",1949));
+
+        when(libraryDatabaseMock.listBooksInHandsOf(testUserMock))
+                .thenReturn(resultListOf5Books);
+
+
+        // When
+        List<Book> theListOf5Books = bookLibrary.listBooksInHandsOf(testUserMock);
+
+        // Then
+        assertEquals(5, theListOf5Books.size());
+        verify(libraryDatabaseMock, times(1)).listBooksInHandsOf(testUserMock);
     }
 }
