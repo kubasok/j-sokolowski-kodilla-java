@@ -149,14 +149,14 @@ public class BoardTestSuite {
         //When
         List<TaskList> inProgressTasks = new ArrayList<>();
         inProgressTasks.add(new TaskList("In progress"));
-//        double averageTaskDuration = ;
-        int cos = IntStream.range(0, project.getTaskLists().stream()
-                .filter(inProgressTasks::contains)
-                .flatMap(tl -> tl.getTasks().stream()).count())
-                .map(t -> ChronoUnit.DAYS.between(t.getCreated(),LocalDate.now()))
-                .count())
-                .map(n -> inProgressTasks.get(n))
-                .average();
 
+        double averageTaskDuration  = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
+                .mapToDouble(t -> t.getProcessingTime())
+                .average().getAsDouble();
+
+        //Then
+        Assert.assertEquals(10, averageTaskDuration, 0.01);
     }
 }

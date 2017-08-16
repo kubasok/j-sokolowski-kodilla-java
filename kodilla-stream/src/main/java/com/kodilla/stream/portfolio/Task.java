@@ -1,6 +1,7 @@
 package com.kodilla.stream.portfolio;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public final class Task {
     private final String title;
@@ -39,6 +40,10 @@ public final class Task {
 
     public LocalDate getCreated() {
         return created;
+    }
+
+    public long getProcessingTime(){
+        return ChronoUnit.DAYS.between(created,LocalDate.now());
     }
 
     public LocalDate getDeadline() {
