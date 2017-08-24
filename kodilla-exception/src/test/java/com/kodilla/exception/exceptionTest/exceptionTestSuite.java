@@ -44,7 +44,7 @@ public class exceptionTestSuite {
         Assert.assertTrue(result);
     }
 
-    @Test
+    @Test(expected = RouteNotFoundException.class)
     public void testFindFlightNull() {
         FlightFinder finder = new FlightFinder();
         Flight flightSearched = new Flight("Warsaw Modlin", "Test Airport");
@@ -61,6 +61,6 @@ public class exceptionTestSuite {
         } finally {
             System.out.println("Search has ended!");
         }
-        Assert.assertNull(result);
+//        Assert.assertNull(result);
     }
 }
