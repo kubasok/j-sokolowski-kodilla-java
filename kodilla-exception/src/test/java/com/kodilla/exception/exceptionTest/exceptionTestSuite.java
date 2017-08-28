@@ -45,22 +45,14 @@ public class exceptionTestSuite {
     }
 
     @Test(expected = RouteNotFoundException.class)
-    public void testFindFlightNull() {
+    public void testFindFlightNull() throws RouteNotFoundException {
         FlightFinder finder = new FlightFinder();
         Flight flightSearched = new Flight("Warsaw Modlin", "Test Airport");
-        Boolean result = null;
-        try {
-            result = finder.findFlight(flightSearched);
-            if (result) {
-                System.out.println("Flight found!");
-            } else {
-                System.out.println("Flight not found.");
-            }
-        } catch (RouteNotFoundException e) {
-            System.out.println("Route not found. Check the airports names.");
-        } finally {
-            System.out.println("Search has ended!");
+
+        if (finder.findFlight(flightSearched)) {
+            System.out.println("Flight found!");
+        } else {
+            System.out.println("Flight not found.");
         }
-//        Assert.assertNull(result);
     }
 }
