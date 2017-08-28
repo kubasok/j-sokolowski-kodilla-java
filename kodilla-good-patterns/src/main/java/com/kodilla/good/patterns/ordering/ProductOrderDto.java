@@ -19,7 +19,7 @@ public class ProductOrderDto {
         return product;
     }
 
-    public boolean isOrdered() {
+    public boolean getIsOrdered() {
         return isOrdered;
     }
 }
