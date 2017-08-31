@@ -1,6 +1,10 @@
 package com.kodilla.good.patterns.food2Door;
 
 public class OrderProcessor {
-//    Shop shop = new Shop();
-//    shop.process();
+    public boolean processOrder(Order order){
+        boolean ordered;
+        ordered = order.getProduct().getProvider().process(order.getProduct(), order.getQuantity());
+        System.out.println("The order is processed!");
+        return ordered;
+    }
 }

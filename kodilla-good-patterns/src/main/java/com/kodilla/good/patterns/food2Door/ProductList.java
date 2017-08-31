@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductList {
-    public List<Product> createList(){
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product("apple", "kg"));
-        productList.add(new Product("beetroot", "kg"));
-        productList.add(new Product("cucumber", ""));
-        productList.add(new Product("garlic", ""));
-        productList.add(new Product("nut", "g"));
-        productList.add(new Product("soy sauce", "l"));
-        return productList;
+    public List<Product> productList = new ArrayList<>();
+    public ProductList(){
+        ProvHealthyShop provHealthyShop = new ProvHealthyShop();
+        ProvGlutenFreeShop provGlutenFreeShop = new ProvGlutenFreeShop();
+        ProvExtraFoodShop provExtraFoodShop = new ProvExtraFoodShop();
+        productList.add(new Product("apple", provExtraFoodShop));
+        productList.add(new Product("beetroot", provGlutenFreeShop));
+        productList.add(new Product("cucumber", provHealthyShop));
+        productList.add(new Product("garlic", provExtraFoodShop));
+        productList.add(new Product("nut", provGlutenFreeShop));
+        productList.add(new Product("soy sauce", provHealthyShop));
+        productList.add(new Product("gluten free snack", provGlutenFreeShop));
+
     }
 }
