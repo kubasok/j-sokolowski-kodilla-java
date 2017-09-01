@@ -33,6 +33,20 @@ public class Flight {
         }
     }
 
+    public boolean flightContains(String airport){
+        return (airportA.equals(airport) || airportB.equals(airport));
+    }
+
+    public String otherAirport(String airport){
+        if (getAirportA().equals(airport)){
+            return getAirportB();
+        } else if (getAirportB().equals(airport)){
+            return getAirportA();
+        } else {
+            return "";
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -5,6 +5,6 @@ public class App {
         FlightSearcher flightSearcher = new FlightSearcher();
 //        flightSearcher.flightSearchFrom("WAW");
 //        flightSearcher.flightSearchTo("MDI");
-        flightSearcher.flightSearchVia("WAW", "KRK");
+        flightSearcher.flightSearchVia("WAW", "MDI");
     }
 }
