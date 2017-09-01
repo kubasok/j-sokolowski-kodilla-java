@@ -2,18 +2,13 @@ package com.kodilla.good.patterns.food2Door;
 
 public class Product {
     private final String name;
-    private final Shop provider;
-    public Product(final String name, final Shop provider) {
+
+    public Product(final String name) {
         this.name = name;
-        this.provider = provider;
     }
 
     public String getName() {
         return name;
-    }
-
-    public Shop getProvider() {
-        return provider;
     }
 
     @Override
@@ -23,14 +18,11 @@ public class Product {
 
         Product product = (Product) o;
 
-        if (!name.equals(product.name)) return false;
-        return provider.equals(product.provider);
+        return name.equals(product.name);
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + provider.hashCode();
-        return result;
+        return name.hashCode();
     }
 }
