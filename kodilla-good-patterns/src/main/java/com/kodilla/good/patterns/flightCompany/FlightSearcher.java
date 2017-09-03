@@ -4,56 +4,36 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FlightSearcher {
-    List<Flight> flightList = new FlightList().flightList;
+    List<DirectFlight> flightList = new FlightList().getFlightList();
 
-    public List<String> flightSearchFrom(String searchedAirport) {
-        List<String> flightsFrom = flightList.stream()
-                .filter(f -> f.flightContains(searchedAirport))
-                .map(f -> f.flightDescrFrom(searchedAirport))
+    public List<DirectFlight> flightSearchFrom(String searchedAirport) {
+        List<DirectFlight> flightsFrom = flightList.stream()
+                .filter(f -> f.getAirportFrom().equals(searchedAirport))
                 .collect(Collectors.toList());
-        flightsFrom.stream().forEach(System.out::println);
         return flightsFrom;
     }
 
-    public List<String> flightSearchTo(String searchedAirport) {
-        List<String> flightsTo = flightList.stream()
-                .filter(f -> f.flightContains(searchedAirport))
-                .map(f -> f.flightDescrTo(searchedAirport))
+    public List<DirectFlight> flightSearchTo(String searchedAirport) {
+        List<DirectFlight> flightsTo = flightList.stream()
+                .filter(f -> f.getAirportTo().equals(searchedAirport))
                 .collect(Collectors.toList());
-        flightsTo.stream().forEach(System.out::println);
         return flightsTo;
     }
 
-    public List<String> flightSearchVia(String searchedAirportFrom, String searchedAirportTo) {
-        Flight searchedFlight = new Flight(searchedAirportFrom, searchedAirportTo);
-        String directFlight = flightList.stream()
-                .filter(f -> f.equals(searchedFlight))
-                .map(f -> f.flightDescrFrom(searchedFlight.getAirportA()))
-                .collect(Collectors.joining());
+    public List<ConnectedFlight> flightSearchVia(String searchedAirportFrom, String searchedAirportTo) {
 
-        List<String> connectedAirportsFrom = flightList.stream()
-                .filter(f -> (f.flightContains(searchedAirportFrom) && !f.flightContains(searchedAirportTo)))
-                .map(f -> f.otherAirport(searchedAirportFrom))
+        DirectFlight directFlight = new DirectFlight(searchedAirportFrom, searchedAirportTo);
+
+        List<String> connectedAirportsFrom = flightSearchFrom(searchedAirportFrom).stream()
+                .filter(f -> !f.equals(directFlight))
+                .map(f -> f.getAirportTo())
                 .collect(Collectors.toList());
 
-        List<String> flightsVia = flightList.stream()
-                .filter(f -> (f.flightContains(searchedAirportTo) && !f.flightContains(searchedAirportFrom)))
-                .map(f -> f.otherAirport(searchedAirportTo))
-                .filter(a -> connectedAirportsFrom.contains(a))
-                .map(a -> searchedAirportFrom + " via " + a + " to " + searchedAirportTo)
+        List<ConnectedFlight> flightsVia = flightSearchTo(searchedAirportTo).stream()
+                .filter(f -> !f.equals(directFlight))
+                .filter(f -> connectedAirportsFrom.contains(f.getAirportFrom()))
+                .map(f -> new ConnectedFlight(searchedAirportFrom, f.getAirportFrom(), searchedAirportTo))
                 .collect(Collectors.toList());
-
-        if (directFlight.isEmpty()){
-            System.out.println("No direct flights.");
-        } else{
-            System.out.println("Direct flight: " + directFlight);
-        }
-
-        if (flightsVia.isEmpty()) {
-            System.out.println("No flights with connection.");
-        } else {
-            flightsVia.stream().forEach(System.out::println);
-        }
 
         return flightsVia;
     }
