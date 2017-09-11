@@ -3,6 +3,7 @@ package com.kodilla.patterns.prototype.library;
 import com.kodilla.patterns.prototype.Prototype;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public final class Library extends Prototype {
@@ -19,6 +20,19 @@ public final class Library extends Prototype {
 
     public Set<Book> getBooks() {
         return books;
+    }
+
+    public Book getBook(int bookNumber) {
+        Book resultBook = null;
+        Iterator<Book> iterator = books.iterator();
+        if(bookNumber < books.size()) {
+            for(int i = 0; i < bookNumber + 1; i++) {
+                resultBook = iterator.next();
+            }
+        } else {
+            resultBook  = null;
+        }
+        return resultBook;
     }
 
     public void setName(String name) {

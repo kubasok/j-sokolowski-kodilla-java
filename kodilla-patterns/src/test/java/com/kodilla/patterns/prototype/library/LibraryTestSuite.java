@@ -13,7 +13,7 @@ public class LibraryTestSuite {
         theLibrary.books.add(new Book("Lord of the Rings", "J.R.R. Tolkien", LocalDate.of(1954,7,29)));
         theLibrary.books.add(new Book("The Colour of Magic", "Terry Pratchett", LocalDate.of(1983,11,24)));
 
-        //shallow clone of object board
+        //shallow clone of library
         Library clonedLibrary = null;
         try {
             clonedLibrary = theLibrary.shallowCopy();
@@ -23,7 +23,7 @@ public class LibraryTestSuite {
         }
         System.out.println(clonedLibrary.books);
 
-        //deep clone of object board
+        //deep clone of library
         Library deepClonedLibrary = null;
         try {
             deepClonedLibrary = theLibrary.deepCopy();
@@ -34,7 +34,8 @@ public class LibraryTestSuite {
         System.out.println(deepClonedLibrary.books);
 
         Assert.assertEquals(3,theLibrary.getBooks().size());
-        Assert.assertEquals(theLibrary.getBooks(), clonedLibrary.getBooks());
-        Assert.assertNotEquals(theLibrary.getBooks(), deepClonedLibrary.getBooks());
+        Assert.assertTrue(theLibrary.getBooks().contains(clonedLibrary.getBook(0)));
+        Assert.assertFalse(theLibrary.getBooks().contains(deepClonedLibrary.getBook(0)));
+
     }
 }
