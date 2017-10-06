@@ -17,8 +17,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(Product product, BigDecimal price, int quantity, BigDecimal value) {
-        this.product = product;
+    public Item(BigDecimal price, int quantity, BigDecimal value) {
         this.price = price;
         this.quantity = quantity;
         this.value = value;
@@ -32,11 +31,11 @@ public class Item {
         return id;
     }
 
-//    @ManyToOne
-//    @JoinColumn(name = "ITEM_PRODUCT")
-//    public Product getProduct() {
-//        return product;
-//    }
+    @ManyToOne
+    @JoinColumn(name = "ITEM_PRODUCT")
+    public Product getProduct() {
+        return product;
+    }
 
     @NotNull
     @Column(name = "ITEM_PRICE")
@@ -62,8 +61,12 @@ public class Item {
         return invoice;
     }
 
-    private void setProduct(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
+    }
+
+    private void setId(int id) {
+        this.id = id;
     }
 
     private void setPrice(BigDecimal price) {
