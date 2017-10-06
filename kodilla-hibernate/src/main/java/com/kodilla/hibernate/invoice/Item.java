@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+
 @Entity
 @Table(name = "ITEMS")
 public class Item {

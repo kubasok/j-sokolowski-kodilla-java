@@ -55,49 +55,8 @@ public class InvoiceDaoTestSuite {
         Assert.assertNotEquals(0, id);
 
         //CleanUp
-        //taskListDao.delete(id);
+        invoiceDao.delete(id);
+        productDao.deleteAll();
+        itemDao.deleteAll();
     }
-//
-//    @Test
-//    public void testInvoiceDaoSave1() {
-//        //Given
-//        Invoice invoice = new Invoice("1");
-//        Product product = new Product("Test Product");
-//        Product product2 = new Product("Test Product2");
-//        Item item = new Item(product, new BigDecimal(1), 1, new BigDecimal(1));
-//        Item item2 = new Item(product2, new BigDecimal(1), 2, new BigDecimal(2));
-//        Item item3 = new Item(product, new BigDecimal(1), 3, new BigDecimal(3));
-//
-//        invoice.getItems().add(item);
-//        invoice.getItems().add(item2);
-//        invoice.getItems().add(item3);
-//
-//        item.setInvoice(invoice);
-//        item2.setInvoice(invoice);
-//        item3.setInvoice(invoice);
-//
-//
-//        //When
-//        invoiceDao.save(invoice);
-//
-////        productDao.save(product);
-////        productDao.save(product2);
-//        int id = invoice.getId();
-//
-//        //Then
-//        Assert.assertNotEquals(0, id);
-//
-//        //CleanUp
-//        //taskListDao.delete(id);
-//    }
-//
-//    @Autowired
-//    ProductDao productDao;
-//
-//    @Test
-//    public void test1(){
-//        Product product = new Product("11");
-//        Assert.assertNotNull(product);
-//    }
-
 }
