@@ -11,6 +11,10 @@ import java.util.List;
                 " WHERE (LEFT(LOWER(COMPANY_NAME), 3) = :NAME_BEGINNING)",
         resultClass = Company.class
 )
+@NamedQuery(
+        name="Company.retrieveCompanyByName",
+        query = "FROM Company WHERE name LIKE :ARG"
+)
 @Entity
 @Table(name = "COMPANIES")
 public class Company {

@@ -95,7 +95,7 @@ public class CompanyDaoTestSuite {
         companyDao.save(softwareMachine);
         companyDao.save(dataMaesters);
         companyDao.save(greyMatter);
-        List<Employee> smithEmployees = employeeDao.retrieveEmployeeByName("Smith");
+        List<Employee> smithEmployees = employeeDao.retrieveEmployeeName("Smith");
         List<Company> sofCompanies = companyDao.retrieveCompaniesStartingWith("sof");
 
         //Then
