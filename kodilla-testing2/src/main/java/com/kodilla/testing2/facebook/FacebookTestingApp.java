@@ -8,9 +8,9 @@ import org.openqa.selenium.support.ui.Select;
 
 public class FacebookTestingApp {
     public static final String XPATH_WAIT_FOR = "//select[1]";
-    public static final String XPATH_SELECT_DAY = "//span[contains(@class, \"_5k_4\")]/select[1]";
-    public static final String XPATH_SELECT_MONTH = "//span[contains(@class, \"_5k_4\")]/select[2]";
-    public static final String XPATH_SELECT_YEAR = "//span[contains(@class, \"_5k_4\")]/select[3]";
+    public static final String XPATH_SELECT_DAY = "//div[contains(@class, \"_5k_5\")]//select[1]";
+    public static final String XPATH_SELECT_MONTH = "//div[contains(@class, \"_5k_5\")]//select[2]";
+    public static final String XPATH_SELECT_YEAR = "//div[contains(@class, \"_5k_5\")]//select[3]";
 
     public static void main(String[] args) {
         WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME);
@@ -28,7 +28,7 @@ public class FacebookTestingApp {
 
         WebElement selectComboYear = driver.findElement(By.xpath(XPATH_SELECT_YEAR));
         Select selectYear = new Select(selectComboYear);
-        selectDay.selectByValue("1992");
+        selectYear.selectByValue("1990");
 
     }
 }
